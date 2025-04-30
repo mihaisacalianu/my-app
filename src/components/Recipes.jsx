@@ -1,5 +1,6 @@
 import Recipe from "./Recipe.jsx"
 import { useState, useRef,useEffect } from "react";
+import {fetchData} from "../fetch.js"
 export default function Recipes() {
   const [recipeTyped, setRecipeTyped] = useState('');
   const [isFetching, setIsFetching] = useState(false);
@@ -7,18 +8,18 @@ export default function Recipes() {
   const userInput = useRef();
 
   useEffect(()=>{
-     async function getMeals(recipeTyped){
+    const url = `https://www.themealdb.com/api/json/v1/1/search.php?s=${recipeTyped}`;
+    async function fetchMeals(){
       setIsFetching(true);
       try {
-        const response = await fetch(`https://www.themealdb.com/api/json/v1/1/search.php?s=${recipeTyped}`);
-        const data = await response.json();
-        setRecipeFetched({data})
-      } catch (error) {
-        return error
-      }
-      setIsFetching(false);
+        const data = await fetchData(url);
+        setRecipeFetched(data);
+        } catch (error) {
+          alert(error.message);
+        }
+        setIsFetching(false);
     }
-    getMeals(recipeTyped);
+    fetchMeals();
   },[recipeTyped]);
 
   function handleSearchButton() {
@@ -41,10 +42,10 @@ export default function Recipes() {
         >Search</button>
       </div>
     <div className="flex  justify-between mt-4">
-     <Recipe
+      {recipeTyped ?  <Recipe
      isLoading={isFetching}
      recipe={recipeFetched}
-     />
+     /> : <p>Your results</p>}
     </div>
     </section>
   );
