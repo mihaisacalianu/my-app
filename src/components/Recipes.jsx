@@ -1,11 +1,51 @@
-export default function Header() {
+import Recipe from "./Recipe.jsx"
+import { useState, useRef,useEffect } from "react";
+export default function Recipes() {
+  const [recipeTyped, setRecipeTyped] = useState('');
+  const [isFetching, setIsFetching] = useState(false);
+  const [recipeFetched, setRecipeFetched] = useState({});
+  const userInput = useRef();
+
+  useEffect(()=>{
+     async function getMeals(recipeTyped){
+      setIsFetching(true);
+      try {
+        const response = await fetch(`https://www.themealdb.com/api/json/v1/1/search.php?s=${recipeTyped}`);
+        const data = await response.json();
+        setRecipeFetched({data})
+      } catch (error) {
+        return error
+      }
+      setIsFetching(false);
+    }
+    getMeals(recipeTyped);
+  },[recipeTyped]);
+
+  function handleSearchButton() {
+    setRecipeTyped(userInput.current.value);
+  }
+
   return(
-    <section className="flex-col gap-2">
+    <section className="flex-col gap-2 w-[45%]">
       <h2>Browse recipes by ingredient</h2>
-      <form action="" className="flex gap-3 mt-2">
-        <input type="text" placeholder="Search for a recipe..." className="border rounded-md border-gray-200 p-1"/>
-        <button className="bg-blue-400 text-white py-0.4 px-2 rounded-sm">Search</button>
-      </form>
+      <div className="flex gap-3 mt-2">
+        <input
+        ref={userInput}
+        type="text"
+        placeholder="Search for a recipe..."
+        className="border rounded-md border-gray-200 p-1"
+        />
+        <button
+        className="bg-blue-400 text-white py-0.4 px-2 rounded-sm"
+        onClick={()=>handleSearchButton()}
+        >Search</button>
+      </div>
+    <div className="flex  justify-between mt-4">
+     <Recipe
+     isLoading={isFetching}
+     recipe={recipeFetched}
+     />
+    </div>
     </section>
   );
 }

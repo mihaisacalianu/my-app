@@ -6,7 +6,7 @@ function App() {
   return (
     <>
       <Header/>
-      <div className="flex gap-5 w-[80%] mx-auto mt-5">
+      <div className="flex gap-4 w-[80%] mx-auto mt-5">
         <Recipes/>
         <Favorites/>
       </div>
