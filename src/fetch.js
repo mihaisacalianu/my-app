@@ -4,5 +4,6 @@ export async function fetchData(url){
   if(!response.ok){
     throw new Error('Failed to fetch meals!')
   }
+  console.log(data.meals);
   return data.meals;
 }

@@ -1,6 +1,7 @@
 import Recipe from "./Recipe.jsx"
 import { useState, useRef,useEffect } from "react";
 import {fetchData} from "../fetch.js"
+
 export default function Recipes() {
   const [recipeTyped, setRecipeTyped] = useState('');
   const [isFetching, setIsFetching] = useState(false);
@@ -17,7 +18,7 @@ export default function Recipes() {
         } catch (error) {
           alert(error.message);
         }
-        setIsFetching(false);
+      setIsFetching(false);
     }
     fetchMeals();
   },[recipeTyped]);
@@ -25,7 +26,6 @@ export default function Recipes() {
   function handleSearchButton() {
     setRecipeTyped(userInput.current.value);
   }
-
   return(
     <section className="flex-col gap-2 w-[45%]">
       <h2>Browse recipes by ingredient</h2>
@@ -37,16 +37,13 @@ export default function Recipes() {
         className="border rounded-md border-gray-200 p-1"
         />
         <button
-        className="bg-blue-400 text-white py-0.4 px-2 rounded-sm"
+        className="bg-green-600 text-white py-0.4 px-2 rounded-sm hover:bg-green-400"
         onClick={()=>handleSearchButton()}
         >Search</button>
       </div>
-    <div className="flex  justify-between mt-4">
-      {recipeTyped ?  <Recipe
-     isLoading={isFetching}
-     recipe={recipeFetched}
-     /> : <p>Your results</p>}
-    </div>
+      <div className="flex-col justify-center mt-4">
+        {recipeTyped ? recipeFetched.map((recipe)=><Recipe key={recipe.idMeal} recipe={recipe} />):<p>Your results</p>}
+      </div>
     </section>
   );
 }
