@@ -4,9 +4,19 @@ import { FavMeals } from "./states";
 export default function Recipe({recipe}) {
   const [meals, setMeals] = useContext(FavMeals);
 
+
   function handleSaveToFavorites() {
     setMeals([...meals, recipe]);
+    // save recipes to local storage
+   // console.log([...meals])
   }
+  localStorage.setItem('favoriteMeals',JSON.stringify([...meals]));
+
+
+  // get items from local storage used or comparison to output an empty array if there are no meals saved to local storage
+  // const favMealsLocal = JSON.parse(localStorage.getItem('favoriteMeals')) || [];
+
+  // console.log(favMealsLocal);
 
   return(
     <>

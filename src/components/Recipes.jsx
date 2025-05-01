@@ -23,6 +23,8 @@ export default function Recipes() {
     fetchMeals();
   },[recipeTyped]);
 
+
+
   function handleSearchButton() {
     setRecipeTyped(userInput.current.value);
   }

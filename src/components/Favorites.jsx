@@ -1,9 +1,15 @@
 import { FaBookmark } from "react-icons/fa";
-import { useContext } from "react";
+import { useContext,useEffect } from "react";
 import  { FavMeals } from "./states";
 import Recipe from "./Recipe";
 export default function Favorites() {
-  const [favMeals] = useContext(FavMeals);
+  const [favMeals,setFavMeals] = useContext(FavMeals);
+
+    useEffect(()=>{
+      const favMealsLocal = JSON.parse(localStorage.getItem('favoriteMeals')) || [];
+      console.log(favMealsLocal);
+      setFavMeals(favMealsLocal);
+    },[setFavMeals])
 
   return(
     <>
