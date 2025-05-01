@@ -16,7 +16,7 @@ function App() {
   return (
     <>
       <Header/>
-      <div className="flex justify-between w-[80%] mx-auto mt-5">
+      <div className="flex gap-0 w-[90%] mx-auto mt-5">
         <FavMeals.Provider value={mealsHook}>
           <Recipes  handleRecipeClick={handleRecipeClick}/>
           <RecipeDetails meal={recipeDetail}/>

@@ -20,7 +20,7 @@ export default function Favorites() {
       </div>)
       :
       (<section className="overflow-scroll flex-col gap-2 p-3 border rounded-md border-gray-200 w-[30%]  h-[80dvh] text-center">
-        <h2 className="text-2xl"><strong>My Favorites</strong></h2>
+        <h2 className="text-2xl text-green-600"><strong>My Favorites</strong></h2>
         <div className=" flex flex-col gap-2 items-center mt-3">
           {
             favMeals.map((meal)=> <Recipe key={meal.idMeal} recipe={meal} />)

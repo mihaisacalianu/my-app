@@ -29,7 +29,7 @@ export default function Recipes({handleRecipeClick}) {
     setRecipeTyped(userInput.current.value);
   }
   return(
-    <section className="flex-col gap-2 w-[25%] overflow-scroll h-[80dvh]">
+    <section className="flex-col gap-2 w-[29%] overflow-scroll h-[80dvh]">
       <h2>Browse recipes by ingredient</h2>
       <div className="flex gap-3 mt-2">
         <input

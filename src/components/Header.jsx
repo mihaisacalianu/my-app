@@ -7,7 +7,7 @@ export default function Header() {
           <h1 className="text-2xl">Recipe Book</h1>
           <GiMeal className="text-4xl text-green-600"/>
         </div>
-        <p>Let's use The Meal DB API to save some delicious recipes</p>
+        <p>Find your dream recipe writing your favorite ingredient!</p>
       </div>
     </header>
   );
