@@ -2,7 +2,7 @@ import Recipe from "./Recipe.jsx"
 import { useState, useRef,useEffect } from "react";
 import {fetchData} from "../fetch.js"
 
-export default function Recipes() {
+export default function Recipes({handleRecipeClick}) {
   const [recipeTyped, setRecipeTyped] = useState('');
   const [isFetching, setIsFetching] = useState(false);
   const [recipeFetched, setRecipeFetched] = useState({});
@@ -29,7 +29,7 @@ export default function Recipes() {
     setRecipeTyped(userInput.current.value);
   }
   return(
-    <section className="flex-col gap-2 w-[45%]">
+    <section className="flex-col gap-2 w-[25%] overflow-scroll h-[80dvh]">
       <h2>Browse recipes by ingredient</h2>
       <div className="flex gap-3 mt-2">
         <input
@@ -45,7 +45,7 @@ export default function Recipes() {
       </div>
       <div className="flex-col justify-center mt-4">
         {recipeTyped && recipeFetched !== null ?
-         recipeFetched.map((recipe)=><Recipe key={recipe.idMeal} recipe={recipe} />)
+         recipeFetched.map((recipe)=><Recipe handleRecipeClick={handleRecipeClick} key={recipe.idMeal} recipe={recipe} />)
          : !recipeTyped ? <p>Your Meals!</p> : <p>No Such Meal!</p>
          }
       </div>

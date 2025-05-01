@@ -13,20 +13,20 @@ export default function Favorites() {
 
   return(
     <>
-    { !FavMeals ?
+    { !favMeals ?
       (<div className="flex gap-2 items-center">
         <p>Add a recipe by clicking on the bookmark icon</p>
         <FaBookmark className="text-lg text-green-600"/>
       </div>)
       :
-      (<section className="flex-col gap-2 p-3 border rounded-md border-gray-200 w-[55%] mx-auto">
-      <h2><strong>My favorites</strong></h2>
-      <div className="flex-col gap-2 items-center mt-2 w-full justify-center">
-        {
-          favMeals.map((meal)=> <Recipe key={meal.idMeal} recipe={meal} />)
-        }
-      </div>
-    </section>)
+      (<section className="overflow-scroll flex-col gap-2 p-3 border rounded-md border-gray-200 w-[30%]  h-[80dvh] text-center">
+        <h2 className="text-2xl"><strong>My Favorites</strong></h2>
+        <div className=" flex flex-col gap-2 items-center mt-3">
+          {
+            favMeals.map((meal)=> <Recipe key={meal.idMeal} recipe={meal} />)
+          }
+        </div>
+      </section>)
     }
     </>
   );
