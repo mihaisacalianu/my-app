@@ -5,9 +5,9 @@ import Recipe from "./Recipe";
 export default function Favorites() {
   const [favMeals,setFavMeals] = useContext(FavMeals);
 
+  // get items from local storage
     useEffect(()=>{
       const favMealsLocal = JSON.parse(localStorage.getItem('favoriteMeals')) || [];
-      console.log(favMealsLocal);
       setFavMeals(favMealsLocal);
     },[setFavMeals])
 

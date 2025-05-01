@@ -1,22 +1,26 @@
 import { FaBookmark } from "react-icons/fa";
+import { IoTrashBinSharp } from "react-icons/io5";
 import { useContext} from "react";
 import { FavMeals } from "./states";
 export default function Recipe({recipe}) {
   const [meals, setMeals] = useContext(FavMeals);
 
-
   function handleSaveToFavorites() {
     setMeals([...meals, recipe]);
-    // save recipes to local storage
-   // console.log([...meals])
   }
+
+  function handleRemoveFromFavorites(id) {
+    // get all meals from local storage
+    const storedMeals = JSON.parse(localStorage.getItem('favoriteMeals')) || [];
+    // filter the meals from local storage
+    const filteredMeals = storedMeals.filter((meal)=> meal.idMeal !== id);
+    // update state with filtered meals
+    setMeals(filteredMeals);
+
+  }
+  // save recipes to local storage
+
   localStorage.setItem('favoriteMeals',JSON.stringify([...meals]));
-
-
-  // get items from local storage used or comparison to output an empty array if there are no meals saved to local storage
-  // const favMealsLocal = JSON.parse(localStorage.getItem('favoriteMeals')) || [];
-
-  // console.log(favMealsLocal);
 
   return(
     <>
@@ -27,6 +31,9 @@ export default function Recipe({recipe}) {
           <h3 className="font-bold">{recipe.strMeal}</h3>
           <button onClick={handleSaveToFavorites}>
             <FaBookmark className="text-lg text-green-600 hover:text-green-400"/>
+          </button>
+          <button onClick={()=>handleRemoveFromFavorites(recipe.idMeal)}>
+            <IoTrashBinSharp className="text-lg text-green-600 hover:text-green-400"/>
           </button>
         </div>
       </div> :

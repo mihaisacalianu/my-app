@@ -44,7 +44,10 @@ export default function Recipes() {
         >Search</button>
       </div>
       <div className="flex-col justify-center mt-4">
-        {recipeTyped ? recipeFetched.map((recipe)=><Recipe key={recipe.idMeal} recipe={recipe} />):<p>Your results</p>}
+        {recipeTyped && recipeFetched !== null ?
+         recipeFetched.map((recipe)=><Recipe key={recipe.idMeal} recipe={recipe} />)
+         : !recipeTyped ? <p>Your Meals!</p> : <p>No Such Meal!</p>
+         }
       </div>
     </section>
   );
